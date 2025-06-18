@@ -67,18 +67,18 @@ function renderTeachers(arr, list) {
         });
     } else {
         let elDiv = document.createElement("div");
-        elDiv.className = "bg-[#FCFAFA] m-w-[979px] mt-[10px]";
+        elDiv.className = "bg-[#FCFAFA] m-w-[900px] mt-[10px]";
         elDiv.innerHTML = `
-            <img class="mx-auto" src="./images/order-img.png" alt="order img" width="340" height="225">
+            <img class="mx-auto" src="./images/teacher-img.png" alt="img" width="340" height="225">
             <h3 class="font-semibold text-[28px] text-[#4F4F4F] text-center pt-[9px]">No Teachers at this time</h3>
             <p class="font-medium text-[14px] text-[#4F4F4F] pt-[4px] text-center ">
                 Teachers will appear here after they enroll in your school.
             </p>
             <div class="justify-end flex mr-[20px] pb-[15px]">
-                <a class="flex bg-[#152259] items-center pt-[21px] pb-[22px] text-[#FCFAFA] text-[14px] font-semibold w-[181px] justify-between px-[24px] rounded-[30px]"
+                <a class="flex bg-[#152259] items-center pt-[21px] pb-[22px] mb-[40px] text-[#FCFAFA] text-[14px] font-semibold w-[181px] justify-between px-[24px] rounded-[30px]"
                     href="#">
-                    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.00016 1.33331C4.32416 1.33331 1.3335 4.32398 ..." fill="#FCFAFA" />
+                     <svg class="mr-[15px]" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M8.00016 1.33331C4.32416 1.33331 1.3335 4.32398 1.3335 7.99998V10.762C1.3335 11.4446 1.9315 12 2.66683 12H3.3335C3.51031 12 3.67988 11.9297 3.8049 11.8047C3.92992 11.6797 4.00016 11.5101 4.00016 11.3333V7.90465C4.00016 7.72784 3.92992 7.55827 3.8049 7.43324C3.67988 7.30822 3.51031 7.23798 3.3335 7.23798H2.72816C3.09883 4.65798 5.31883 2.66665 8.00016 2.66665C10.6815 2.66665 12.9015 4.65798 13.2722 7.23798H12.6668C12.49 7.23798 12.3204 7.30822 12.1954 7.43324C12.0704 7.55827 12.0002 7.72784 12.0002 7.90465V12C12.0002 12.7353 11.4022 13.3333 10.6668 13.3333H9.3335V12.6666H6.66683V14.6666H10.6668C12.1375 14.6666 13.3335 13.4706 13.3335 12C14.0688 12 14.6668 11.4446 14.6668 10.762V7.99998C14.6668 4.32398 11.6762 1.33331 8.00016 1.33331Z" fill="#FCFAFA"/>
                     </svg>
                     <p class="pr-[35px]">Support</p>
                     <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@ function renderTeachers(arr, list) {
 
 // Render Products end
 
-if (location.pathname == "/order.html") {
+if (location.pathname == "/ui.html") {
     orderHeading(teacherHeading, elOrderHeading, orders);
     renderTeachers(orders, elTeacherTableBody);
 }

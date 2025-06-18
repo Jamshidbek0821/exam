@@ -5,12 +5,26 @@ let elTeacherTable = document.querySelector(".teachers-tables")
 let elSearchInput = document.querySelector(".search-input")
 let elChooseFile = document.querySelector(".img-file")
 let elChooseImg = document.querySelector(".img-choose")
+let elWrapper = document.querySelector("#wrapper")
+let isUser = document.querySelector(".logined-user")
+let findedUser = JSON.parse(localStorage.getItem("user"))
+
+
+let User = passwords.find(item => item.password == findedUser.password && item.username == findedUser.username)
+
+
+
+isUser.innerHTML = `${User.firstname} ${User.lastname}`
+
+
+
+
 // Sahifa yuklanganda localStorage dan rasmni yuklash
 let savedImage = localStorage.getItem("uploaded-image")
 if (savedImage) {
     elChooseImg.src = savedImage
 } else {
-    elChooseImg.src = "./images/logo-img.png" // default image
+    elChooseImg.src = "./images/profile-img.png" // default image
 }
 // Rasmga bosilganda file input ochiladi
 elChooseImg.addEventListener("click", function () {
@@ -31,7 +45,7 @@ elChooseFile.addEventListener("change", function (evt) {
 elChooseImg.addEventListener("contextmenu", function (e) {
     e.preventDefault()
     localStorage.removeItem("uploaded-image")
-    elChooseImg.src = "./images/logo-img.png"
+    elChooseImg.src = "./images/profile-img.png"
 })
 // Add teacher part start
 function handleAddBtnClick() {
@@ -136,6 +150,16 @@ function handleAddBtnClick() {
         })
     })
 }
+elWrapper.addEventListener("click", () => {
+    elWrapper.classList.add("scale-0")
+})
+
+// Bu yerda eventni to‘xtatamiz:
+modalInner.addEventListener("click", (e) => {
+    e.stopPropagation()
+})
+
+
 // Add teacher part end
 // update part start 
 function handleUpdateTeacher(id) {
@@ -216,26 +240,27 @@ function handleUpdateTeacher(id) {
     elChooseFile.addEventListener("change", function (evt) {
         elChooseImg.src = URL.createObjectURL(evt.target.files[0])
     })
-    elUpdateTeacher.addEventListener("submit", function (evt) {
-        evt.preventDefault()
-        findedObj.ID = evt.target.ID.value
-        findedObj.fullName = evt.target.fullName.value
-        findedObj.emailAddress = evt.target.emailAddress.value
-        findedObj.subjectId = evt.target.subjectId.value
-        findedObj.about = evt.target.about.value
-        findedObj.className = evt.target.className.value
-        findedObj.gender = evt.target.gender.value
-        findedObj.age = evt.target.age.value
-        findedObj.imgURL = elChooseImg.src
-        localStorage.setItem("teachers", JSON.stringify(teachers))
-        setTimeout(() => {
-            elSubmitBtn.innerHTML = `Update`
-            setTimeout(() => {
-                modalWrapper.classList.add("scale-0")
-                renderTeachers(teachers, elTeacherTable)
-            }, 1000)
-        })
-    })
+  elUpdateTeacher.addEventListener("submit", function (evt) {
+    evt.preventDefault()
+    findedObj.fullName = evt.target.fullName.value
+    findedObj.emailAddress = evt.target.emailAddress.value
+    findedObj.subjectId = evt.target.subjectId.value
+    findedObj.about = evt.target.about.value
+    findedObj.className = evt.target.className.value
+    findedObj.gender = evt.target.gender.value
+    findedObj.age = evt.target.age.value
+    findedObj.imgURL = elChooseImg.src
+
+    localStorage.setItem("teachers", JSON.stringify(teachers))
+
+    elSubmitBtn.innerHTML = `Updating...`
+
+    setTimeout(() => {
+        modalWrapper.classList.add("scale-0")
+        renderTeachers(teachers, elTeacherTable)
+    }, 1000)
+})
+
 }
 // update part end 
 // Delete Part startAdd commentMore actions
@@ -266,3 +291,23 @@ elSearchInput.addEventListener("input", function (e) {
     renderTeachers(feltredTeachers, elTeacherTable)
 })
 // Search Part end
+
+isUser.addEventListener("click", () => {
+    modalWrapper.classList.remove("scale-0")
+    modalInner.innerHTML = `
+        <div class="w-[400px]">
+            <h1 class="font-bold mb-[20px] text-[25px] text-center">Do you want to go out?</h1>
+            <div class="flex items-center justify-center gap-[20px]">
+                <button onclick="handleCancel()" class="hover:opacity-[70%] duration-300 w-[50%] p-[8px] bg-green-700 cursor-pointer text-white font-normal text-[15px] rounded-[35px]">Cancel</button>
+                <button onclick="handleSignOut()" class="hover:opacity-[70%] duration-300 w-[50%] p-[8px] bg-red-700 cursor-pointer text-white font-normal text-[15px] rounded-[35px]">Exit</button>
+            </div>
+        </div>
+    `
+})
+function handleCancel() {
+    modalWrapper.classList.add("scale-0")
+}
+
+function handleSignOut(){
+    location.pathname ="/index.html"
+}

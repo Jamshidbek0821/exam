@@ -4,6 +4,8 @@ let modalWrapper = document.querySelector(".modal-wrapper")
 let modalInner = document.querySelector(".modal-inner")
 
 let User = passwords.find(item => item.password == findedUser.password && item.username == findedUser.username)
+console.log("salom");
+
 
 isUser.innerHTML = `${User.firstname} ${User.lastname}`
 
